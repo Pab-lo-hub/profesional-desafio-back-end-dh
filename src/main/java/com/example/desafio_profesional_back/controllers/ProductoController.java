@@ -54,11 +54,27 @@ public class ProductoController {
     /**
      * This method is called when a PUT request is made
      * URL: localhost:8080/producto/v1/
-     * Purpose: Update a Prsoducto entity
+     * Purpose: Update a Producto entity
      * @param producto - Producto entity to be updated
      * @return Updated Producto
      */
+    @PutMapping("/")
+    public ResponseEntity<Producto> updateProducto (@RequestBody Producto producto){
+        return ResponseEntity.ok().body(productoService.updateProducto(producto));
+    }
 
+    /**
+     * This method is called when a Delete request is made
+     * URL: localhost:8080/producto/v1/1 (or any other id)
+     * Purpose: Delete an Producto entity
+     * @param id - Producto's id to be deleted
+     * @return a String message indicating producto record has been deleted successfully
+     */
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteProducto(@PathVariable Integer id) {
+        productoService.deleteProductoById(id);
+        return ResponseEntity.ok().body("Eliminado correctamente");
+    }
 
 
 }
